@@ -1,4 +1,26 @@
 package com.eventcafecloud.comment;
 
-public class Comment {
+import com.eventcafecloud.common.base.BaseTimeEntity;
+import com.eventcafecloud.post.domain.Post;
+import com.eventcafecloud.user.domain.User;
+import lombok.Getter;
+
+import javax.persistence.*;
+
+@Getter
+@Entity
+public class Comment extends BaseTimeEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long commentNumber;
+
+    private String commentContent;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_number")
+    private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "post_number")
+    private Post post;
 }
