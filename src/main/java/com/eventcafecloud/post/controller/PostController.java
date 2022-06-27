@@ -2,7 +2,6 @@ package com.eventcafecloud.post.controller;
 
 import com.eventcafecloud.post.dto.*;
 import com.eventcafecloud.post.service.PostService;
-import com.eventcafecloud.post.domain.Post;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

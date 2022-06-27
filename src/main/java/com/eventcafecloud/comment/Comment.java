@@ -1,16 +1,15 @@
 package com.eventcafecloud.comment;
-
-
+import com.eventcafecloud.common.base.BaseTimeEntity;
 import com.eventcafecloud.post.domain.Post;
+import com.eventcafecloud.user.domain.User;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Entity
 @Getter
-@NoArgsConstructor
-public class Comment {
+@Entity
+
+public class Comment extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,11 +18,13 @@ public class Comment {
     @Column(nullable = false)
     private String commentContent;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_number")
     private Post post;
 
-//    @ManyToOne
-//    @JoinColumn(name = "user_number")
-//    private User user;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_number")
+    private User user;
+    
+
 }
