@@ -4,6 +4,8 @@ import com.eventcafecloud.cafe.Cafe;
 import com.eventcafecloud.common.base.BaseTimeEntity;
 import com.eventcafecloud.event.domain.type.EventCategory;
 import com.eventcafecloud.event.dto.EventRequestDto;
+import com.eventcafecloud.event.dto.EventUpdateRequestDto;
+import com.eventcafecloud.event.repository.EventRepository;
 import com.eventcafecloud.user.domain.User;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -56,7 +58,7 @@ public class Event extends BaseTimeEntity {
     @OneToMany(mappedBy = "event")
     private List<EventImage> eventImages = new ArrayList<>();
 
-    public Event(EventRequestDto requestDto) {
+    public Event(EventRequestDto requestDto, User user, Cafe cafe) {
         this.eventName = requestDto.getEventName();
         this.eventCategory = requestDto.getEventCategory();
         this.eventStartDate = requestDto.getEventStartDate();
@@ -64,5 +66,10 @@ public class Event extends BaseTimeEntity {
         this.eventInfo = requestDto.getEventInfo();
         this.eventPrice = requestDto.getEventPrice();
         this.eventCancelAvail = true;
+    }
+
+    public void updateEvent(EventUpdateRequestDto requestDto) {
+        this.eventName = requestDto.getEventName();
+        this.eventInfo = requestDto.getEventInfo();
     }
 }

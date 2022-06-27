@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Getter
 public class EventResponseDto {
+    private Integer eventNumber;
 //    private String eventName;
 //    private EventCategory eventCategory;
 //    private LocalDate eventStartDate;
