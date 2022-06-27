@@ -1,5 +1,4 @@
-package com.eventcafecloud.comment;
-
+package com.eventcafecloud.post;
 
 import com.eventcafecloud.post.domain.Post;
 import lombok.Getter;
@@ -10,20 +9,17 @@ import javax.persistence.*;
 @Entity
 @Getter
 @NoArgsConstructor
-public class Comment {
+public class PostImage {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long commentNumber;
+    private Long postImageNumber;
 
     @Column(nullable = false)
-    private String commentContent;
+    private String postImageUrl;
 
     @ManyToOne
     @JoinColumn(name = "post_number")
     private Post post;
 
-//    @ManyToOne
-//    @JoinColumn(name = "user_number")
-//    private User user;
 }
