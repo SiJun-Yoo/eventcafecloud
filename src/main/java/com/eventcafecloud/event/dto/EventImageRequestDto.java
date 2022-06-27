@@ -13,5 +13,4 @@ import java.util.List;
 @Getter
 public class EventImageRequestDto {
     private String eventImageUrl;
-
 }
