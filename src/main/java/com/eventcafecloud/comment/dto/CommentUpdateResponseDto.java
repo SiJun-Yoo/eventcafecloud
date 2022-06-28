@@ -1,5 +1,6 @@
 package com.eventcafecloud.comment.dto;
 
+import com.eventcafecloud.post.domain.Post;
 import com.eventcafecloud.user.domain.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,4 +12,5 @@ import lombok.Getter;
 public class CommentUpdateResponseDto {
     private String commentContent;
     private User userNumber;
+    private Post postNumber;
 }

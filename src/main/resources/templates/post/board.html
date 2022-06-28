@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <body>
+        <div>
+            <table>
+                <tr>
+                    <th>제목</th>
+                    <th>내용</th>
+                </tr>
+                <tr th:each="post : ${posts}">
+                    <td th:text="${post.getPostTitle()}"></td>
+                    <td th:text="${post.getPostContent()}"></td>
+                </tr>
+            </table>
+        </div>
+    </body>
+</html>

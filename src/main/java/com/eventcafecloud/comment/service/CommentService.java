@@ -3,8 +3,6 @@ package com.eventcafecloud.comment.service;
 import com.eventcafecloud.comment.domain.Comment;
 import com.eventcafecloud.comment.dto.*;
 import com.eventcafecloud.comment.repository.CommentRepository;
-import com.eventcafecloud.post.dto.PostDeleteResponseDto;
-import com.eventcafecloud.post.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,6 +27,7 @@ public class CommentService {
         return CommentCreateResponseDto.builder()
                 .commentContent(commentResult.getCommentContent())
                 .userNumber(commentResult.getUser())
+                .postNumber(commentResult.getPost())
                 .build();
     }
     //댓글 조회
@@ -41,6 +40,7 @@ public class CommentService {
             commentReadResponseDto.setCommentContent(value.getCommentContent());
             commentReadResponseDto.setCommentNumber(value.getCommentNumber());
             commentReadResponseDto.setUserNumber(value.getUser());
+            commentReadResponseDto.setPostNumber(value.getPost());
             output.add(commentReadResponseDto);
         }
         return output;
@@ -55,6 +55,7 @@ public class CommentService {
         return CommentUpdateResponseDto.builder()
                 .commentContent(comment.getCommentContent())
                 .userNumber(comment.getUser())
+                .postNumber(comment.getPost())
                 .build();
     }
     //댓글 삭제
