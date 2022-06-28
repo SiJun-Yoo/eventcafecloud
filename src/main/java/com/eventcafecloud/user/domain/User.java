@@ -2,6 +2,7 @@ package com.eventcafecloud.user.domain;
 
 import com.eventcafecloud.common.base.BaseTimeEntity;
 import com.eventcafecloud.event.domain.EventBookmark;
+import com.eventcafecloud.event.domain.EventLike;
 import com.eventcafecloud.post.domain.Post;
 import com.eventcafecloud.user.domain.type.Gender;
 import com.eventcafecloud.user.domain.type.UserStatus;
@@ -45,4 +46,7 @@ public class User extends BaseTimeEntity {
 
     @OneToMany(mappedBy = "user")
     private List<EventBookmark> eventBookmarks = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    private List<EventLike> eventLikes = new ArrayList<>();
 }
