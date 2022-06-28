@@ -21,7 +21,8 @@ public class UserController {
         org.springframework.security.core.userdetails.User principal
                 = (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        User user = userService.getUser(principal.getUsername());
+        User user = userService.getUser(principal.getUsername()).orElseThrow();
+        //todo orElseThorw에 ENUM 타입 메세지 추가
 
         return ApiResponse.success("user", user);
     }
