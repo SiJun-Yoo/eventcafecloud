@@ -18,6 +18,8 @@ import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class CustomOAuth2UserService extends DefaultOAuth2UserService {
@@ -44,29 +46,26 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         //현재 진행중인 서비스를 구분하기 위해 문자열을 받음
         ProviderType providerType = ProviderType.valueOf(userRequest.getClientRegistration().getRegistrationId().toUpperCase());
         OAuth2UserInfo userInfo = OAuth2UserInfoFactory.getOAuth2UserInfo(providerType, user.getAttributes());
-        User savedUser = userRepository.findByUserEmail(userInfo.getEmail()).orElseThrow();
+        Optional<User> checkUser = userRepository.findByUserEmail(userInfo.getEmail());
+        User savedUser = checkUser.isEmpty() ? createUser(userInfo, providerType) : checkUser.get();
 
-        if (savedUser != null) {
-            if (providerType != savedUser.getUserRegPath()) {
-                throw new OAuthProviderMissMatchException(
-                        "가입 경로가 잘못 되었습니다. " + savedUser.getUserRegPath() + "로 다시 로그인해주세요"
-                );
-            }
-            updateUser(savedUser, userInfo);
-        } else {
-            savedUser = createUser(userInfo, providerType);
+        if (providerType != savedUser.getUserRegPath()) {
+            throw new OAuthProviderMissMatchException(
+                    "가입 경로가 잘못 되었습니다. " + savedUser.getUserRegPath() + "로 다시 로그인해주세요"
+            );
         }
+        updateUser(savedUser, userInfo);
 
         return UserPrincipal.create(savedUser, user.getAttributes());
     }
 
     //가져온 사용자 정보에 변경이 있다면 업데이트를 실행
     private User updateUser(User user, OAuth2UserInfo userInfo) {
-        if(userInfo.getNickname() != null && !user.getUserNickname().equals(userInfo.getNickname())){
+        if (userInfo.getNickname() != null && !user.getUserNickname().equals(userInfo.getNickname())) {
             user.setUserNickname(userInfo.getNickname());
         }
 
-        if(userInfo.getUserImage() != null && !user.getUserImage().equals(userInfo.getUserImage())){
+        if (userInfo.getUserImage() != null && !user.getUserImage().equals(userInfo.getUserImage())) {
             user.setUserImage(userInfo.getUserImage());
         }
 
