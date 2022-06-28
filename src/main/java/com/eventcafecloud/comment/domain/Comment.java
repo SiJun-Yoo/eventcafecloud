@@ -1,12 +1,15 @@
-package com.eventcafecloud.comment;
+package com.eventcafecloud.comment.domain;
+import com.eventcafecloud.comment.dto.CommentUpdateRequestDto;
 import com.eventcafecloud.common.base.BaseTimeEntity;
 import com.eventcafecloud.post.domain.Post;
 import com.eventcafecloud.user.domain.User;
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 @Getter
+@Setter
 @Entity
 
 public class Comment extends BaseTimeEntity {
@@ -25,6 +28,9 @@ public class Comment extends BaseTimeEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_number")
     private User user;
-    
+
+    public void updateComment(CommentUpdateRequestDto requestDto) {
+        this.commentContent = requestDto.getCommentContent();
+    }
 
 }

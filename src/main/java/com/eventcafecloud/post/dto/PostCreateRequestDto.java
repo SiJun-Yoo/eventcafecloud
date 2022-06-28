@@ -1,7 +1,7 @@
 package com.eventcafecloud.post.dto;
 
-
-import com.eventcafecloud.board.Board;
+import com.eventcafecloud.post.domain.type.Board;
+import com.eventcafecloud.user.domain.User;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -11,5 +11,6 @@ import lombok.RequiredArgsConstructor;
 public class PostCreateRequestDto {
     private String postTitle;
     private String postContent;
-    private Board board;
+    private Board boardType;
+    private User userNumber;
 }

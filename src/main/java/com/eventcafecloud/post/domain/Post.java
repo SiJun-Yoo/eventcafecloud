@@ -1,15 +1,21 @@
 package com.eventcafecloud.post.domain;
 
-import com.eventcafecloud.comment.Comment;
+import com.eventcafecloud.comment.domain.Comment;
 import com.eventcafecloud.common.base.BaseTimeEntity;
-import com.eventcafecloud.post.dto.PostCreateRequestDto;
+import com.eventcafecloud.post.dto.PostUpdateRequestDto;
 import com.eventcafecloud.user.domain.User;
+import com.eventcafecloud.post.domain.type.Board;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Setter
+@Getter
+
 public class Post extends BaseTimeEntity {
 
     @Id
@@ -22,6 +28,9 @@ public class Post extends BaseTimeEntity {
     @Column(nullable = false)
     private String postContent;
 
+    @Enumerated(EnumType.STRING)
+    private Board boardType;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_number")
     private User user;
@@ -33,7 +42,7 @@ public class Post extends BaseTimeEntity {
     private List<PostImage> postImages = new ArrayList<>();
 
 
-    public void updatePost(PostCreateRequestDto requestDto) {
+    public void updatePost(PostUpdateRequestDto requestDto) {
         this.postContent = requestDto.getPostContent();
     }
 

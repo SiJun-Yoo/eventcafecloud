@@ -1,4 +1,4 @@
-package com.eventcafecloud.post.dto;
+package com.eventcafecloud.comment.dto;
 
 import com.eventcafecloud.user.domain.User;
 import lombok.AllArgsConstructor;
@@ -6,9 +6,9 @@ import lombok.Builder;
 import lombok.Getter;
 
 @Getter
-@AllArgsConstructor
 @Builder
-public class PostUpdateResponseDto {
-    private Long postNumber;
+@AllArgsConstructor
+public class CommentUpdateResponseDto {
+    private String commentContent;
     private User userNumber;
 }

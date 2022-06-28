@@ -13,6 +13,7 @@ public class PostController {
 
     private final PostService postService;
 
+    //게시글 등록
     @PostMapping("/board")
     public PostCreateResponseDto createPost(@RequestBody PostCreateRequestDto requestDto) {
         return postService.createPost(requestDto);
@@ -24,13 +25,15 @@ public class PostController {
         return postService.getPost();
     }
 
+    //게시글 업데이트
     @PutMapping("/board/{postNumber}")
-    public PostUpdateResponseDto updatePost(@PathVariable Long postNumber, @RequestBody PostCreateRequestDto requestDto) {
+    public PostUpdateResponseDto updatePost(@PathVariable Long postNumber, @RequestBody PostUpdateRequestDto requestDto) {
         return postService.updatePost(postNumber, requestDto);
     }
 
+    //게시글 삭제
     @DeleteMapping("/delete/{postNumber}")
-    public PostDeleteResponseDto deletePost(@PathVariable Long postNumber) {
+    public ResponseVO<PostDeleteResponseDto> deletePost(@PathVariable Long postNumber) {
         return postService.deletePost(postNumber);
     }
 }
