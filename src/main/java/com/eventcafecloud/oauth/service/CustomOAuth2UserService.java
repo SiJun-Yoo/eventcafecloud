@@ -44,7 +44,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         //현재 진행중인 서비스를 구분하기 위해 문자열을 받음
         ProviderType providerType = ProviderType.valueOf(userRequest.getClientRegistration().getRegistrationId().toUpperCase());
         OAuth2UserInfo userInfo = OAuth2UserInfoFactory.getOAuth2UserInfo(providerType, user.getAttributes());
-        User savedUser = userRepository.findByUserEmail(userInfo.getEmail());
+        User savedUser = userRepository.findByUserEmail(userInfo.getEmail()).orElseThrow();
 
         if (savedUser != null) {
             if (providerType != savedUser.getUserRegPath()) {
