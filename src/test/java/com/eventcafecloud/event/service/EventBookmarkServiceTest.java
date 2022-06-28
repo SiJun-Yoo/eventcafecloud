@@ -1,13 +1,9 @@
 package com.eventcafecloud.event.service;
 
-import com.eventcafecloud.user.domain.User;
-import com.eventcafecloud.user.domain.UserRepository;
-import org.junit.jupiter.api.BeforeAll;
+import com.eventcafecloud.user.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
