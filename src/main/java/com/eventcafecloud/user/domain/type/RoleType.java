@@ -11,7 +11,7 @@ public enum RoleType {
     NORMAL("ROLE_NORMAL", "일반회원"),
     HOST("ROLE_HOST", "사장님"),
     ADMIN("ROLE_ADMIN", "관리자"),
-    GUEST("GUEST", "게스트");
+    GUEST("ROLE_GUEST", "게스트");
 
     private final String code;
     private final String displayName;
