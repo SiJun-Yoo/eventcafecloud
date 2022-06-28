@@ -24,7 +24,6 @@ public class EventService {
         this.eventRepository = eventRepository;
     }
 
-    // 등록된 모든 이벤트 목록 조회
     public List<EventReadResponseDto> getEvents() {
         List<Event> event = eventRepository.findAll();
         List<EventReadResponseDto> result = new ArrayList<>();
@@ -36,14 +35,12 @@ public class EventService {
         return result;
     }
 
-    // 신규 이벤트 예약
-    public EventCreateResponseDto createEvent(List<EventImage> eventImage, EventCreateRequestDto requestDto, User user, Cafe cafe) {
+    public EventCreateResponseDto createEvent(EventCreateRequestDto requestDto, User user, Cafe cafe) {
         Event event = new Event(requestDto, user, cafe);
         Event eventResult = eventRepository.save(event);
         return EventCreateResponseDto.from(eventResult);
     }
 
-    // 이벤트 수정
     @Transactional
     public EventUpdateResponseDto updateEvent(Long eventNumber, EventUpdateRequestDto requestDto) {
         Event event =  eventRepository.findById(eventNumber).orElseThrow(
@@ -59,6 +56,4 @@ public class EventService {
     public void deleteEvent(Long eventNumber) {
         eventRepository.deleteById(eventNumber);
     }
-
-
 }

@@ -15,10 +15,6 @@ import java.util.List;
 @Getter
 @Entity
 public class EventImage extends Image {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "event_image_number")
-    @Id
-    private Long eventImageNumber;
 
     @Column(nullable = false)
     private String eventImageUrl;
@@ -38,14 +34,5 @@ public class EventImage extends Image {
         this.eventImageUrl = eventImageUrl;
         this.createdDate = createdDate;
         this.modifiedDate = modifiedDate;
-    }
-
-    // Event 정보 저장
-    public void setEvent(Event event) {
-        this.event = event;
-
-        // Event에 현재 이미지 파일이 존재하지 않는다면
-        if (!event.getEventImage().contains(this))
-            event.getEventImage().add(this);
     }
 }

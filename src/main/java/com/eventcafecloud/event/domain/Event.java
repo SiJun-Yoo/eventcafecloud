@@ -22,7 +22,6 @@ import java.util.List;
 public class Event extends BaseTimeEntity {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "event_number")
     @Id
     private Long eventNumber;
 
@@ -59,11 +58,7 @@ public class Event extends BaseTimeEntity {
     @OneToMany(mappedBy = "event")
     private List<EventBookmark> eventBookmarks = new ArrayList<>();
 
-    @OneToMany(
-            mappedBy = "event",
-            cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
-            orphanRemoval = true
-    )
+    @OneToMany(mappedBy = "event")
     private List<EventImage> eventImage = new ArrayList<>();
 
     @Builder
@@ -80,14 +75,5 @@ public class Event extends BaseTimeEntity {
     public void updateEvent(EventUpdateRequestDto requestDto) {
         this.eventName = requestDto.getEventName();
         this.eventInfo = requestDto.getEventInfo();
-    }
-
-    // Event에서 이미지 파일 처리를 위해
-    public void addEventImage(EventImage eventImage) {
-        this.eventImage.add(eventImage);
-
-        // 이미지 파일이 저장되어 있지 않은 경우
-        if (eventImage.getEvent() != this)
-            eventImage.setEvent(this);
     }
 }

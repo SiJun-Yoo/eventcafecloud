@@ -9,5 +9,4 @@ import java.util.List;
 
 
 public interface EventImageRepository extends JpaRepository<EventImage, Long> {
-    // List<EventImage> findeAllByEvent(Event event);
 }
