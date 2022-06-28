@@ -1,14 +1,12 @@
 package com.eventcafecloud.event.repository;
 
-import com.eventcafecloud.cafe.Cafe;
 import com.eventcafecloud.event.domain.Event;
-import com.eventcafecloud.event.dto.EventRequestDto;
-import com.eventcafecloud.user.domain.User;
+import com.eventcafecloud.event.dto.EventCreateRequestDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
 public interface EventRepository extends JpaRepository<Event, Long> {
-    List<Event> findAllByEventNumber(Long eventNumber, EventRequestDto requestDto);
+    List<Event> findAllByEventNumber(Long eventNumber, EventCreateRequestDto requestDto);
 
 }

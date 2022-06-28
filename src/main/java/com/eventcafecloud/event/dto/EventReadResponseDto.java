@@ -8,9 +8,10 @@ import lombok.*;
 import java.time.LocalDate;
 import java.util.List;
 
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PROTECTED) // 외부의 접근을 막기 위해
+@Setter
 @Getter
-public class EventResponseDto {
+public class EventReadResponseDto {
     private Long eventNumber;
     private String eventName;
     private EventCategory eventCategory;
@@ -18,19 +19,20 @@ public class EventResponseDto {
     private LocalDate eventEndDate;
     private String eventInfo;
     private EventCafe cafe;
-    private List<EventImage> eventImages
+    private List<EventImage> eventImages;
 
 
-    public EventResponseDto(Event event) {
+    public EventReadResponseDto(Event event) {
         this.eventNumber = event.getEventNumber();
         this.eventName = event.getEventName();
+        this.eventCategory = event.getEventCategory();
         this.eventStartDate = event.getEventStartDate();
         this.eventEndDate = event.getEventEndDate();
         this.eventInfo = event.getEventInfo();
-        this.cafe = EventCafe.builder();
+        this.cafe = EventCafe.builder()
                 .cafeNumber(event.getCafe().getCafeNumber())
                 .cafeName(event.getCafe().getCafeName())
-                .cafeZoncode(event.getCafe().getCafeZoneCode())
+                .cafeZoneCode(event.getCafe().getCafeZoneCode())
                 .cafeAddress(event.getCafe().getCafeAddress())
                 .cafeAddressDetail(event.getCafe().getCafeAddressDetail())
                 .build();

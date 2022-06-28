@@ -3,9 +3,8 @@ package com.eventcafecloud.event.domain;
 import com.eventcafecloud.cafe.Cafe;
 import com.eventcafecloud.common.base.BaseTimeEntity;
 import com.eventcafecloud.event.domain.type.EventCategory;
-import com.eventcafecloud.event.dto.EventRequestDto;
+import com.eventcafecloud.event.dto.EventCreateRequestDto;
 import com.eventcafecloud.event.dto.EventUpdateRequestDto;
-import com.eventcafecloud.event.repository.EventRepository;
 import com.eventcafecloud.user.domain.User;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -23,6 +22,7 @@ import java.util.List;
 public class Event extends BaseTimeEntity {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "event_number")
     @Id
     private Long eventNumber;
 
@@ -56,11 +56,15 @@ public class Event extends BaseTimeEntity {
     @JoinColumn(name = "cafe_number")
     private Cafe cafe;
 
-    @OneToMany(mappedBy = "event")
-    private List<EventImage> eventImages = new ArrayList<>();
+    @OneToMany(
+            mappedBy = "event",
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
+            orphanRemoval = true
+    )
+    private List<EventImage> eventImage = new ArrayList<>();
 
     @Builder
-    public Event(EventRequestDto requestDto, User user, Cafe cafe) {
+    public Event(EventCreateRequestDto requestDto, User user, Cafe cafe) {
         this.eventName = requestDto.getEventName();
         this.eventCategory = requestDto.getEventCategory();
         this.eventStartDate = requestDto.getEventStartDate();
@@ -73,5 +77,14 @@ public class Event extends BaseTimeEntity {
     public void updateEvent(EventUpdateRequestDto requestDto) {
         this.eventName = requestDto.getEventName();
         this.eventInfo = requestDto.getEventInfo();
+    }
+
+    // Event에서 이미지 파일 처리를 위해
+    public void addEventImage(EventImage eventImage) {
+        this.eventImage.add(eventImage);
+
+        // 이미지 파일이 저장되어 있지 않은 경우
+        if (eventImage.getEvent() != this)
+            eventImage.setEvent(this);
     }
 }

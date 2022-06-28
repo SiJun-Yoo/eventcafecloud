@@ -1,16 +1,15 @@
 package com.eventcafecloud.event.dto;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.eventcafecloud.event.domain.EventImage;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
+@Builder
 @Getter
 public class EventImageRequestDto {
-    private String eventImageUrl;
+    List<String> eventImageUrl;
 }

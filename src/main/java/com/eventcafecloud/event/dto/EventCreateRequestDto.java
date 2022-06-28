@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Getter
-public class EventRequestDto {
+public class EventCreateRequestDto {
     private String eventName;
     private EventCategory eventCategory;
     private LocalDate eventStartDate;
