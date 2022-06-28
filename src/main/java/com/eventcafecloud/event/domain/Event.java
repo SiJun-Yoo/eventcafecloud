@@ -43,4 +43,7 @@ public class Event extends BaseTimeEntity {
 
     @OneToMany(mappedBy = "event")
     private List<EventImage> eventImages = new ArrayList<>();
+
+    @OneToMany(mappedBy = "event")
+    private List<EventBookmark> eventBookmarks = new ArrayList<>();
 }
