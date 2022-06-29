@@ -40,7 +40,8 @@ public class User extends BaseTimeEntity {
     @Column(length = 100)
     private String userGender;
 
-    @Column(length = 100, nullable = false)
+    @Lob
+    @Column(length = 10000, nullable = false)
     private String userImage;
 
     @Column(length = 1, nullable = false)
