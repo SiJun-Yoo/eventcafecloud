@@ -3,11 +3,14 @@ package com.eventcafecloud.cafe;
 import com.eventcafecloud.common.base.BaseTimeEntity;
 import com.eventcafecloud.event.domain.Event;
 import com.eventcafecloud.user.domain.User;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+
 
 @Getter
 @Entity
@@ -56,4 +59,5 @@ public class Cafe extends BaseTimeEntity {
 
     @OneToMany(mappedBy = "cafe")
     private List<Event> events = new ArrayList<>();
+
 }
