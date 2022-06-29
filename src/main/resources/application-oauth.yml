@@ -4,14 +4,14 @@ spring:
     oauth2.client:
       registration:
         google:
-          clientId: 1087898503865-066s8ja5o8gmh7fq4f62h553sdtkp406.apps.googleusercontent.com
-          clientSecret: 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
+          clientId: 
+          clientSecret: 
           scope:
             - email
             - profile
         naver:
-          clientId: U3NFItF5ocCzVS7EG8K5
-          clientSecret: s02N2j1vA9
+          clientId: 
+          clientSecret: 
           clientAuthenticationMethod: post
           authorizationGrantType: authorization_code
           redirectUri: "{baseUrl}/{action}/oauth2/code/{registrationId}"
@@ -21,8 +21,8 @@ spring:
             - profile_image
           clientName: Naver
         kakao:
-          clientId: 4e08cd48d935c6fc61530e2874bec9d4
-          clientSecret: DvbVUbOQGb9jbFEnb02Xprz9ijd7yRBR
+          clientId:
+          clientSecret: 
           clientAuthenticationMethod: post
           authorizationGrantType: authorization_code
           redirectUri: "{baseUrl}/{action}/oauth2/code/{registrationId}"
