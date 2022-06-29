@@ -1,6 +1,5 @@
 package com.eventcafecloud.post.dto;
 
-import com.eventcafecloud.user.domain.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -10,5 +9,4 @@ import lombok.Getter;
 @Builder
 public class PostUpdateResponseDto {
     private Long postNumber;
-    private User userNumber;
 }

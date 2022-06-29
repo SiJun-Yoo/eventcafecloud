@@ -7,7 +7,5 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public class PostUpdateRequestDto {
-    private String postTitle;
     private String postContent;
-    private User userNumber;
 }

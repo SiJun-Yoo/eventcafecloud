@@ -9,6 +9,4 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CommentUpdateRequestDto {
     private String commentContent;
-    private User userNumber;
-    private Post postNumber;
 }

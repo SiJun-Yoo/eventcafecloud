@@ -1,5 +1,5 @@
 package com.eventcafecloud.post.domain.type;
 
-public enum Board {
+public enum PostType {
     NOTICE,USER,REVIEW
 }

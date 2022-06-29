@@ -1,8 +1,6 @@
 package com.eventcafecloud.post.dto;
 
-
-import com.eventcafecloud.post.domain.type.Board;
-import com.eventcafecloud.user.domain.User;
+import com.eventcafecloud.post.domain.type.PostType;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -13,14 +11,13 @@ import lombok.RequiredArgsConstructor;
 public class PostCreateResponseDto {
     private String postTitle;
     private String postContent;
-    private Board boardType;
-    private User userNumber;
+    private PostType postType;
 
     @Builder
-    public PostCreateResponseDto(String postTitle, String postContent, Board board, User userNumber) {
+    public PostCreateResponseDto(String postTitle, String postContent, PostType postType) {
         this.postTitle = postTitle;
         this.postContent = postContent;
-        this.boardType = board;
-        this.userNumber = userNumber;
+        this.postType = postType;
+
     }
 }

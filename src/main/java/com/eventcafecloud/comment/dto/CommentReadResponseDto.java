@@ -11,6 +11,5 @@ public class CommentReadResponseDto {
     private Post postNumber;
     private Long commentNumber;
     private String commentContent;
-    private User userNumber;
 
 }

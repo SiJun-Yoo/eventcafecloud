@@ -1,7 +1,6 @@
 package com.eventcafecloud.post.dto;
 
-import com.eventcafecloud.post.domain.type.Board;
-import com.eventcafecloud.user.domain.User;
+import com.eventcafecloud.post.domain.type.PostType;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,6 +10,7 @@ public class PostReadResponseDto {
     private Long postNumber;
     private String postTitle;
     private String postContent;
-    private Board BoardType;
-    private User userNumber;
+    private PostType postType;
+    private Long postCount;
+
 }

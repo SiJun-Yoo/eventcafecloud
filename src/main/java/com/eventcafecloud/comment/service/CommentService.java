@@ -7,77 +7,61 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.eventcafecloud.exception.ExceptionStatus.COMMENT_NOT_FOUND;
+
+
 @RequiredArgsConstructor
 @Service
+@Transactional
+
 public class CommentService {
 
     private final CommentRepository commentRepository;
 
-    //댓글 생성
     public CommentCreateResponseDto createComment(CommentCreateRequestDto requestDto) {
-
         Comment comment = new Comment();
         comment.setCommentContent(requestDto.getCommentContent());
         Comment commentResult = commentRepository.save(comment);
 
         return CommentCreateResponseDto.builder()
                 .commentContent(commentResult.getCommentContent())
-                .userNumber(commentResult.getUser())
-                .postNumber(commentResult.getPost())
                 .build();
     }
-    //댓글 조회
+
     public List<CommentReadResponseDto> getComment() {
         List<Comment> comments = commentRepository.findAll();
         List<CommentReadResponseDto> output = new ArrayList<>();
 
-        for (Comment value : comments) {
+        for (Comment comment : comments) {
             CommentReadResponseDto commentReadResponseDto = new CommentReadResponseDto();
-            commentReadResponseDto.setCommentContent(value.getCommentContent());
-            commentReadResponseDto.setCommentNumber(value.getCommentNumber());
-            commentReadResponseDto.setUserNumber(value.getUser());
-            commentReadResponseDto.setPostNumber(value.getPost());
+            commentReadResponseDto.setCommentContent(comment.getCommentContent());
+            commentReadResponseDto.setCommentNumber(comment.getCommentNumber());
             output.add(commentReadResponseDto);
         }
         return output;
     }
-    //댓글 업데이트
-    @Transactional
+
+    @Transactional(readOnly = true)
     public CommentUpdateResponseDto updateComment(@PathVariable Long CommentNumber, CommentUpdateRequestDto requestDto) {
-        Comment comment = commentRepository.findById(CommentNumber).orElseThrow(
-                () -> new IllegalArgumentException("해당 댓글이 존재하지 않습니다")
-        );
+        Comment comment = commentRepository.findById(CommentNumber).orElseThrow(() -> new IllegalArgumentException(COMMENT_NOT_FOUND.getMessage()));
         comment.updateComment(requestDto);
         return CommentUpdateResponseDto.builder()
-                .commentContent(comment.getCommentContent())
-                .userNumber(comment.getUser())
-                .postNumber(comment.getPost())
+                .commentNumber(comment.getCommentNumber())
                 .build();
     }
-    //댓글 삭제
-    public ResponseVO<CommentDeleteResponseDto> deleteComment(Long commentNumber){
+
+    public CommentDeleteResponseDto deleteComment(Long commentNumber) {
         CommentDeleteResponseDto commentDeleteResponseDto = new CommentDeleteResponseDto(commentNumber);
-        ResponseVO<CommentDeleteResponseDto> responseVO = new ResponseVO<CommentDeleteResponseDto>();
-        try{
+        try {
             commentRepository.deleteById(commentNumber);
-            responseVO.setStatus(true);
-            responseVO.setMsg("삭제에 성공하였습니다.");
-            responseVO.setResult(commentDeleteResponseDto);
-        }catch (Exception e){
-            responseVO.setStatus(false);
-            responseVO.setMsg("삭제에 실패 하였습니다.");
-            responseVO.setResult(commentDeleteResponseDto);
+        } catch (Exception e) {
+            throw new IllegalArgumentException(COMMENT_NOT_FOUND.getMessage());
         }
-        return responseVO;
+        return commentDeleteResponseDto;
     }
-
-
-
-
-
 
 }

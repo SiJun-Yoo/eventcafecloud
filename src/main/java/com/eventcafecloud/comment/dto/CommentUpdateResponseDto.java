@@ -10,7 +10,5 @@ import lombok.Getter;
 @Builder
 @AllArgsConstructor
 public class CommentUpdateResponseDto {
-    private String commentContent;
-    private User userNumber;
-    private Post postNumber;
+    private Long commentNumber;
 }

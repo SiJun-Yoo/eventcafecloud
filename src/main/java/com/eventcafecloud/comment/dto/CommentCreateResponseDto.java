@@ -11,12 +11,11 @@ import lombok.RequiredArgsConstructor;
 public class CommentCreateResponseDto {
     private String commentContent;
     private Post postNumber;
-    private User userNumber;
 
     @Builder
-    public CommentCreateResponseDto(String commentContent, Post postNumber, User userNumber) {
+    public CommentCreateResponseDto(String commentContent, Post postNumber) {
         this.commentContent = commentContent;
         this.postNumber = postNumber;
-        this.userNumber = userNumber;
+
     }
 }
